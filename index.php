@@ -1,7 +1,7 @@
 <?php
 
 use Race\Entities\Player;
-use Race\RaceGame;
+use Race\RacingGame;
 use Race\Repositories\VehicleRepository;
 use Race\Transformers\VehiclesDtoToCliMenuTransformer;
 use function cli\line;
@@ -12,7 +12,7 @@ require_once 'autoload.php';
 
 $vehicleRepository = new VehicleRepository();
 $vehicleList = $vehicleRepository->get();
-$game = new RaceGame();
+$game = new RacingGame();
 
 $playerId = 1;
 $playersVehicle = [];

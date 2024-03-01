@@ -4,12 +4,12 @@ namespace Race;
 
 use Race\Entities\Player;
 
-class RaceGame
+class RacingGame
 {
     private array $player;
 
     /**
-     * @param \Race\Entities\Player $player
+     * @param Player $player
      *
      * @return $this
      */
