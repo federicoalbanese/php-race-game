@@ -1,6 +1,7 @@
 <?php
 
 use Race\DTO\PlayerVehicleDTO;
+use Race\Entities\Player;
 use Race\RaceGame;
 use Race\Repositories\VehicleRepository;
 use Race\Transformers\VehiclesDtoToCliMenuTransformer;
@@ -27,7 +28,8 @@ while ($playerId < 3) {
         break;
     }
 
-    $game->addPlayerVehicle(PlayerVehicleDTO::fromArray(['vehicle' => $vehicleList[$choice],'player_id' => $playerId]));
+    $player = new Player(sprintf('player %s', $playerId), $vehicleRepository->find($choice));
+    $game->addPlayerVehicle($player);
     unset($vehicleList[$choice]);
     $playerId++;
     line();
