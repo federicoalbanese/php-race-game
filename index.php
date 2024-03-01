@@ -1,6 +1,5 @@
 <?php
 
-use Race\DTO\PlayerVehicleDTO;
 use Race\Entities\Player;
 use Race\RaceGame;
 use Race\Repositories\VehicleRepository;
@@ -11,7 +10,8 @@ use function cli\out;
 
 require_once 'autoload.php';
 
-$vehicleList = (new VehicleRepository())->get();
+$vehicleRepository = new VehicleRepository();
+$vehicleList = $vehicleRepository->get();
 $game = new RaceGame();
 
 $playerId = 1;
@@ -34,3 +34,4 @@ while ($playerId < 3) {
     $playerId++;
     line();
 }
+$gameData = $game->play();
