@@ -1,14 +1,14 @@
 <?php
 namespace Race\Transformers;
 
-use Race\DTO\VehicleDTO;
+use Race\Entities\Vehicle;
 
 class VehiclesDtoToCliMenuTransformer
 {
-    public static function transform(array $vehicleDTOs)
+    public static function transform(array $vehicles)
     {
-        return array_map(function (VehicleDTO $vehicleDto){
-            return $vehicleDto->getName();
-        },  $vehicleDTOs);
+        return array_map(function (Vehicle $vehicle){
+            return $vehicle->getName();
+        },  $vehicles);
     }
 }
