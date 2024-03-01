@@ -4,6 +4,7 @@ namespace Race;
 
 use Race\Entities\Player;
 use Race\Entities\Vehicle;
+use Race\Enums\Units;
 
 class RacingGame
 {
@@ -25,6 +26,8 @@ class RacingGame
     }
 
     /**
+     * @param int $distance
+     *
      * @return array
      */
     public function play(int $distance): array
@@ -38,19 +41,35 @@ class RacingGame
         return [
             'player1' => [
                 'name' => $firstPlayer->getName(),
+                'vehicle_name' => $firstPlayer->getSelectedVehicle()->getName(),
                 'time' => $timeFirstPlayer,
             ],
             'player2' => [
                 'name' => $secondPlayer->getName(),
+                'vehicle_name' => $secondPlayer->getSelectedVehicle()->getName(),
                 'time' => $timeSecondPlayer,
             ],
             'winner' => ($timeFirstPlayer < $timeSecondPlayer) ? $firstPlayer->getName() : $secondPlayer->getName()
         ];
     }
 
-    private function calculateTime(Vehicle $vehicle, int $distance)
+    /**
+     * @param Vehicle $vehicle
+     * @param int $distance
+     *
+     * @return float|int
+     */
+    private function calculateTime(Vehicle $vehicle, int $distance): float|int
     {
+        $speed = $vehicle->getMaxSpeed();
 
+        switch ($vehicle->getUnit()){
+            case Units::KNOTS->value:
+            case Units::KTS->value :
+                $speed *= 1.852;
+                break;
+        }
 
+        return $distance / $speed;
     }
 }
