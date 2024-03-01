@@ -1,5 +1,7 @@
 <?php
 
+use Race\DTO\PlayerVehicleDTO;
+use Race\RaceGame;
 use Race\Repositories\VehicleRepository;
 use Race\Transformers\VehiclesDtoToCliMenuTransformer;
 use function cli\line;
@@ -9,10 +11,12 @@ use function cli\out;
 require_once 'autoload.php';
 
 $vehicleList = (new VehicleRepository())->get();
+$game = new RaceGame();
 
-
-while (true) {
-    out('player one choice vehicle from below list: ');
+$playerId = 1;
+$playersVehicle = [];
+while ($playerId < 3) {
+    out(sprintf("player %s choice vehicle from below list: ", $playerId));
     line();
     line();
 
@@ -23,6 +27,7 @@ while (true) {
         break;
     }
 
-    include "{$choice}.php";
+    $game->addPlayerVehicle(PlayerVehicleDTO::fill(['vehicle' => $vehicleList[$choice],'player_id' => $playerId]));
+    $playerId++;
     line();
 }
