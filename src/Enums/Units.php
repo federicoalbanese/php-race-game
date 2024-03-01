@@ -4,11 +4,11 @@ namespace Race\Enums;
 
 enum Units: string
 {
-    case KTS = 'kts';
+    case KTS = 'Kts';
 
     case KNOTS = 'knots';
 
-    case KM_PER_HOUR = 'km/h';
+    case KM_PER_HOUR = 'Km/h';
 
     /**
      * @param  string  $string
