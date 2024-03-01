@@ -2,7 +2,6 @@
 
 namespace Race\Repositories;
 
-use Race\DTO\VehicleDTO;
 use Race\Entities\Vehicle;
 
 class VehicleRepository
