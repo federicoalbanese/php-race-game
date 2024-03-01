@@ -34,4 +34,26 @@ while ($playerId < 3) {
     $playerId++;
     line();
 }
-$gameData = $game->play();
+$distance = 100;
+
+$raceResults = $game->play($distance);
+
+
+out( "Race Results:");
+line();
+out(sprintf("Player 1 - %s:", $raceResults['player1']['name']));
+line();
+out(sprintf("   Vehicle: %s", $raceResults['player1']['vehicle_name']));
+line();
+out(sprintf("   Time: %s units", $raceResults['player1']['time']));
+line();
+out(sprintf("Player 2 - %s:",$raceResults['player2']['name']));
+line();
+out(sprintf("   Vehicle: %s", $raceResults['player2']['vehicle_name']));
+line();
+out(sprintf("   Time: %s units", $raceResults['player2']['time']));
+
+line();
+line();
+
+out(sprintf('Winner: %s', $raceResults['winner']));
