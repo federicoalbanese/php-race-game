@@ -6,7 +6,7 @@ class Vehicle
 {
     public function __construct(
         private readonly string $name,
-        private readonly int $speed,
+        private readonly int $maxSpeed,
         private readonly string $unit,
     ) {
     }
@@ -22,9 +22,9 @@ class Vehicle
     /**
      * @return int
      */
-    public function getSpeed(): int
+    public function getMaxSpeed(): int
     {
-        return $this->speed;
+        return $this->maxSpeed;
     }
 
     /**
