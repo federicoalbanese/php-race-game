@@ -2,20 +2,20 @@
 
 namespace Race;
 
-use Race\DTO\PlayerVehicleDTO;
+use Race\Entities\Player;
 
 class RaceGame
 {
-    private array $playerVehicleDto;
+    private array $player;
 
     /**
-     * @param \Race\DTO\PlayerVehicleDTO $playerVehicleDTO
+     * @param \Race\Entities\Player $player
      *
      * @return $this
      */
-    public function addPlayerVehicle(PlayerVehicleDTO $playerVehicleDTO): self
+    public function addPlayerVehicle(Player $player): self
     {
-        $this->playerVehicleDto[] = $playerVehicleDTO;
+        $this->player[] = $player;
 
         return $this;
     }
