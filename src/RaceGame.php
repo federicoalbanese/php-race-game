@@ -2,16 +2,29 @@
 
 namespace Race;
 
+use Race\DTO\PlayerVehicleDTO;
+
 class RaceGame
 {
+    private array $playerVehicleDto;
 
     /**
-     * @param array<\Race\DTO\PlayerVehicleDTO> $playersVehicle
+     * @param \Race\DTO\PlayerVehicleDTO $playerVehicleDTO
      *
-     * @return void
+     * @return $this
      */
-    public static function play(array $playersVehicle)
+    public function addPlayerVehicle(PlayerVehicleDTO $playerVehicleDTO): self
     {
-        var_dump($playersVehicle);
+        $this->playerVehicleDto[] = $playerVehicleDTO;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function play(): array
+    {
+        return [];
     }
 }
