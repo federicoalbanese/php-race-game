@@ -28,6 +28,7 @@ while ($playerId < 3) {
     }
 
     $game->addPlayerVehicle(PlayerVehicleDTO::fromArray(['vehicle' => $vehicleList[$choice],'player_id' => $playerId]));
+    unset($vehicleList[$choice]);
     $playerId++;
     line();
 }
