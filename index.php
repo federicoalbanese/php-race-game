@@ -29,7 +29,7 @@ while ($playerId < 3) {
     }
 
     $player = new Player(sprintf('player %s', $playerId), $vehicleRepository->find($choice));
-    $game->addPlayerVehicle($player);
+    $game->addPlayer($player);
     unset($vehicleList[$choice]);
     $playerId++;
     line();

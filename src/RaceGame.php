@@ -13,7 +13,7 @@ class RaceGame
      *
      * @return $this
      */
-    public function addPlayerVehicle(Player $player): self
+    public function addPlayer(Player $player): self
     {
         $this->player[] = $player;
 
