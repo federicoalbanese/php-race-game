@@ -2,12 +2,19 @@
 
 namespace Race;
 
+use Exception;
 use Race\Entities\Player;
 use Race\Entities\Vehicle;
 use Race\Enums\Units;
 
 class RacingGame
 {
+    private array $unitConversionFactors = [
+        Units::KM_PER_HOUR->value => 1,
+        Units::KNOTS->value => 1.852,
+        Units::KTS->value => 1.852,
+    ];
+
     /**
      * @var array<Player>
      */
@@ -29,6 +36,7 @@ class RacingGame
      * @param int $distance
      *
      * @return array
+     * @throws \Exception
      */
     public function play(int $distance): array
     {
@@ -42,12 +50,12 @@ class RacingGame
             'player1' => [
                 'name' => $firstPlayer->getName(),
                 'vehicle_name' => $firstPlayer->getSelectedVehicle()->getName(),
-                'time' => $timeFirstPlayer,
+                'time' => $timeFirstPlayer * 60,
             ],
             'player2' => [
                 'name' => $secondPlayer->getName(),
                 'vehicle_name' => $secondPlayer->getSelectedVehicle()->getName(),
-                'time' => $timeSecondPlayer,
+                'time' => $timeSecondPlayer * 60,
             ],
             'winner' => ($timeFirstPlayer < $timeSecondPlayer) ? $firstPlayer->getName() : $secondPlayer->getName()
         ];
@@ -58,18 +66,27 @@ class RacingGame
      * @param int $distance
      *
      * @return float|int
+     * @throws \Exception
      */
     private function calculateTime(Vehicle $vehicle, int $distance): float|int
     {
-        $speed = $vehicle->getMaxSpeed();
+        $speedInKmPerHour = $this->convertSpeedToKmPerHour($vehicle->getMaxSpeed(), $vehicle->getUnit());
 
-        switch ($vehicle->getUnit()){
-            case Units::KNOTS->value:
-            case Units::KTS->value :
-                $speed *= 1.852;
-                break;
+        return $distance / $speedInKmPerHour;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function convertSpeedToKmPerHour(float $speed, string $unit): float
+    {
+        var_dump($this->unitConversionFactors[$unit]);
+        $conversionFactor = $this->unitConversionFactors[$unit] ?? null;
+
+        if ($conversionFactor === null) {
+            throw new Exception('Invalid conversion factor for unit: ' . $unit);
         }
 
-        return $distance / $speed;
+        return $speed * $conversionFactor;
     }
 }
