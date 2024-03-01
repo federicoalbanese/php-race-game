@@ -45,13 +45,13 @@ out(sprintf("Player 1 - %s:", $raceResults['player1']['name']));
 line();
 out(sprintf("   Vehicle: %s", $raceResults['player1']['vehicle_name']));
 line();
-out(sprintf("   Time: %s units", $raceResults['player1']['time']));
+out(sprintf("   Time: %s minutes", $raceResults['player1']['time']));
 line();
 out(sprintf("Player 2 - %s:",$raceResults['player2']['name']));
 line();
 out(sprintf("   Vehicle: %s", $raceResults['player2']['vehicle_name']));
 line();
-out(sprintf("   Time: %s units", $raceResults['player2']['time']));
+out(sprintf("   Time: %s minutes", $raceResults['player2']['time']));
 
 line();
 line();
