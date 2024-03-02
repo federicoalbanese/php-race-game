@@ -2,7 +2,7 @@
 
 namespace Race\DTOs;
 
-class PlayerResultDTO
+readonly class PlayerResultDTO
 {
     /**
      * @param  string  $name

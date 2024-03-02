@@ -2,11 +2,11 @@
 
 namespace Race\Entities;
 
-class Player
+readonly class Player
 {
     public function __construct(
-        private readonly string $name,
-        private readonly Vehicle $vehicle
+        private string $name,
+        private Vehicle $vehicle
     )
     {
     }

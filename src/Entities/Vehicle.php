@@ -2,12 +2,12 @@
 
 namespace Race\Entities;
 
-class Vehicle
+readonly class Vehicle
 {
     public function __construct(
-        private readonly string $name,
-        private readonly int $maxSpeed,
-        private readonly string $unit,
+        private string $name,
+        private int $maxSpeed,
+        private string $unit,
     ) {
     }
 
