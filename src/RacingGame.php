@@ -40,7 +40,7 @@ class RacingGame
      * @return GameResultDTO
      * @throws \Exception
      */
-    public function play(int $distance): GameResultDTO
+    public function runGame(int $distance): GameResultDTO
     {
         $firstPlayer = $this->player[0];
         $secondPlayer = $this->player[1];

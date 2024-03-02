@@ -36,7 +36,7 @@ while ($playerId < 3) {
 }
 $distance = 100;
 
-$gameResult = $game->play($distance);
+$gameResult = $game->runGame($distance);
 
 
 out( "Race Results:");
