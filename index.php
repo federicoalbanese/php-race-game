@@ -12,9 +12,9 @@ require_once 'autoload.php';
 
 $vehicleRepository = new VehicleRepository();
 $vehicleList = $vehicleRepository->get();
-$game = new RacingGame();
 
 $playerId = 1;
+$players = [];
 $playersVehicle = [];
 while ($playerId < 3) {
     out(sprintf("player %s choice vehicle from below list: ", $playerId));
@@ -28,14 +28,13 @@ while ($playerId < 3) {
         break;
     }
 
-    $player = new Player(sprintf('player %s', $playerId), $vehicleRepository->find($choice));
-    $game->addPlayer($player);
+    $players[] = new Player(sprintf('player %s', $playerId), $vehicleRepository->find($choice));
     unset($vehicleList[$choice]);
     $playerId++;
     line();
 }
+$game = new RacingGame($players[0], $players[1]);
 $distance = 100;
-
 $gameResult = $game->runGame($distance);
 
 
