@@ -3,6 +3,8 @@
 namespace Race;
 
 use Exception;
+use Race\DTOs\GameResultDTO;
+use Race\DTOs\PlayerResultDTO;
 use Race\Entities\Player;
 use Race\Entities\Vehicle;
 use Race\Enums\Units;
@@ -35,30 +37,33 @@ class RacingGame
     /**
      * @param int $distance
      *
-     * @return array
+     * @return GameResultDTO
      * @throws \Exception
      */
-    public function play(int $distance): array
+    public function play(int $distance): GameResultDTO
     {
         $firstPlayer = $this->player[0];
         $secondPlayer = $this->player[1];
 
         $timeFirstPlayer = $this->calculateTime($firstPlayer->getSelectedVehicle(), $distance);
         $timeSecondPlayer = $this->calculateTime($secondPlayer->getSelectedVehicle(), $distance);
+        $winner = ($timeFirstPlayer < $timeSecondPlayer) ? $firstPlayer->getName() : $secondPlayer->getName();
 
-        return [
-            'player1' => [
-                'name' => $firstPlayer->getName(),
-                'vehicle_name' => $firstPlayer->getSelectedVehicle()->getName(),
-                'time' => $timeFirstPlayer * 60,
-            ],
-            'player2' => [
-                'name' => $secondPlayer->getName(),
-                'vehicle_name' => $secondPlayer->getSelectedVehicle()->getName(),
-                'time' => $timeSecondPlayer * 60,
-            ],
-            'winner' => ($timeFirstPlayer < $timeSecondPlayer) ? $firstPlayer->getName() : $secondPlayer->getName()
-        ];
+        return (
+            new GameResultDTO(
+                new PlayerResultDTO(
+                        $firstPlayer->getName(),
+                        $firstPlayer->getSelectedVehicle()->getName(),
+                        $timeFirstPlayer * 60
+                ),
+                new PlayerResultDTO(
+                        $secondPlayer->getName(),
+                        $secondPlayer->getSelectedVehicle()->getName(),
+                        $timeSecondPlayer * 60
+                ),
+                $winner
+            )
+        );
     }
 
     /**
