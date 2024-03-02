@@ -1,9 +1,9 @@
 <?php
-namespace Race\Transformers;
+namespace Race\Transformers\Menu;
 
 use Race\Entities\Vehicle;
 
-class VehiclesDtoToCliMenuTransformer
+class VehiclesTransformer
 {
     public static function transform(array $vehicles)
     {
