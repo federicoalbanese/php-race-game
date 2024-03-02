@@ -3,7 +3,7 @@
 use Race\Entities\Player;
 use Race\RacingGame;
 use Race\Repositories\VehicleRepository;
-use Race\Transformers\VehiclesDtoToCliMenuTransformer;
+use Race\Transformers\Menu\VehiclesTransformer;
 use function cli\line;
 use function cli\menu;
 use function cli\out;
@@ -21,7 +21,7 @@ while ($playerId < 3) {
     line();
     line();
 
-    $choice = menu(VehiclesDtoToCliMenuTransformer::transform($vehicleList), null, 'Choose an vehicle');
+    $choice = menu(VehiclesTransformer::transform($vehicleList), null, 'Choose an vehicle');
     line();
 
     if ($choice == 'quit') {
@@ -36,24 +36,24 @@ while ($playerId < 3) {
 }
 $distance = 100;
 
-$raceResults = $game->play($distance);
+$gameResult = $game->play($distance);
 
 
 out( "Race Results:");
 line();
-out(sprintf("Player 1 - %s:", $raceResults['player1']['name']));
+out(sprintf("Player 1 - %s:", $gameResult->getPlayerOneResultDTO()->getName()));
 line();
-out(sprintf("   Vehicle: %s", $raceResults['player1']['vehicle_name']));
+out(sprintf("   Vehicle: %s", $gameResult->getPlayerOneResultDTO()->getVehicleName()));
 line();
-out(sprintf("   Time: %s minutes", $raceResults['player1']['time']));
+out(sprintf("   Time: %s minutes", $gameResult->getPlayerOneResultDTO()->getTime()));
 line();
-out(sprintf("Player 2 - %s:",$raceResults['player2']['name']));
+out(sprintf("Player 2 - %s:",$gameResult->getPlayerSecondResultDTO()->getName()));
 line();
-out(sprintf("   Vehicle: %s", $raceResults['player2']['vehicle_name']));
+out(sprintf("   Vehicle: %s", $gameResult->getPlayerSecondResultDTO()->getVehicleName()));
 line();
-out(sprintf("   Time: %s minutes", $raceResults['player2']['time']));
+out(sprintf("   Time: %s minutes", $gameResult->getPlayerSecondResultDTO()->getTime()));
 
 line();
 line();
 
-out(sprintf('Winner: %s', $raceResults['winner']));
+out(sprintf('Winner: %s', $gameResult->getWinner()));
