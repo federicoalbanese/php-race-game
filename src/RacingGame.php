@@ -85,7 +85,6 @@ class RacingGame
      */
     private function convertSpeedToKmPerHour(float $speed, string $unit): float
     {
-        var_dump($this->unitConversionFactors[$unit]);
         $conversionFactor = $this->unitConversionFactors[$unit] ?? null;
 
         if ($conversionFactor === null) {
