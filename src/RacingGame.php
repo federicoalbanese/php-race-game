@@ -17,21 +17,8 @@ class RacingGame
         Units::KTS->value => 1.852,
     ];
 
-    /**
-     * @var array<Player>
-     */
-    private array $player;
-
-    /**
-     * @param Player $player
-     *
-     * @return $this
-     */
-    public function addPlayer(Player $player): self
+    public function __construct(private readonly Player $firstPlayer, private readonly Player $secondPlayer)
     {
-        $this->player[] = $player;
-
-        return $this;
     }
 
     /**
@@ -42,23 +29,20 @@ class RacingGame
      */
     public function runGame(int $distance): GameResultDTO
     {
-        $firstPlayer = $this->player[0];
-        $secondPlayer = $this->player[1];
-
-        $timeFirstPlayer = $this->calculateTime($firstPlayer->getSelectedVehicle(), $distance);
-        $timeSecondPlayer = $this->calculateTime($secondPlayer->getSelectedVehicle(), $distance);
-        $winner = ($timeFirstPlayer < $timeSecondPlayer) ? $firstPlayer->getName() : $secondPlayer->getName();
+        $timeFirstPlayer = $this->calculateTime($this->firstPlayer->getSelectedVehicle(), $distance);
+        $timeSecondPlayer = $this->calculateTime($this->secondPlayer->getSelectedVehicle(), $distance);
+        $winner = ($timeFirstPlayer < $timeSecondPlayer) ? $this->firstPlayer->getName() : $this->secondPlayer->getName();
 
         return (
             new GameResultDTO(
                 new PlayerResultDTO(
-                        $firstPlayer->getName(),
-                        $firstPlayer->getSelectedVehicle()->getName(),
+                        $this->firstPlayer->getName(),
+                        $this->firstPlayer->getSelectedVehicle()->getName(),
                         $timeFirstPlayer * 60
                 ),
                 new PlayerResultDTO(
-                        $secondPlayer->getName(),
-                        $secondPlayer->getSelectedVehicle()->getName(),
+                        $this->secondPlayer->getName(),
+                        $this->secondPlayer->getSelectedVehicle()->getName(),
                         $timeSecondPlayer * 60
                 ),
                 $winner
